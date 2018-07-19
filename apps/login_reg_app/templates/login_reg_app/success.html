@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <!-- <h2>Hello {{request.session.user_name}}!</h2> -->
+    <h2>Hello {{user.name}}!</h2>
+    <p>This is your info:</p>
+    <h4>Email: {{user.email}}</h4>
+    <h2>Amadon storefront</h2>
+    <table>
+        <thead>
+            <th>
+                Item
+            </th>
+            <th>
+                Number of times bought
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+                Actions
+            </th>
+        </thead>
+        {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{ product.total_purchases }}</td>
+            <td>${{product.price}}</td>
+                <td>
+                    <form action="/products/{{product.id}}/buy/" method="POST">
+                        {% csrf_token %}
+                        <select name="quantity" id="">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                        </select>
+                        <input type="submit">
+                    </form>
+                </td>
+                
+            
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
